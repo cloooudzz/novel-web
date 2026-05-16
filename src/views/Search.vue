@@ -1,6 +1,14 @@
+
 <template>
   <div class="search-page">
-    <h2 class="title">搜索小说</h2>
+    <!-- 返回按钮和标题区域 -->
+    <div class="page-header">
+      <el-button @click="goBack" class="back-btn">
+        <el-icon><ArrowLeft /></el-icon> 返回
+      </el-button>
+      <h2 class="title">搜索小说</h2>
+      <div class="placeholder"></div>
+    </div>
 
     <!-- 搜索框 -->
     <div class="search-bar">
@@ -85,7 +93,7 @@
 import { ref, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
-import { Search, ArrowRight } from '@element-plus/icons-vue'
+import { Search, ArrowRight, ArrowLeft } from '@element-plus/icons-vue'
 import request from '@/utils/request'
 
 const route = useRoute()
@@ -96,6 +104,11 @@ const searched = ref(false)
 const searchText = ref('')
 const keyword = ref('')
 const novelList = ref([])
+
+// 返回上一页
+const goBack = () => {
+  router.push('/')
+}
 
 // 处理封面图片URL
 const getCoverUrl = (cover) => {
@@ -198,11 +211,45 @@ onMounted(() => {
   box-sizing: border-box;
 }
 
-.title {
-  font-size: 24px;
+/* 页面头部 - 返回按钮 + 标题 */
+.page-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 20px;
+  padding: 5px 0;
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 16px;
+  color: #606266;
+  padding: 8px 16px;
+  transition: all 0.3s;
+}
+
+.back-btn:hover {
+  color: #409eff;
+  background-color: #ecf5ff;
+}
+
+.title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 22px;
+  margin: 0;
   color: #303133;
-  text-align: center;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.placeholder {
+  width: 80px;
+  visibility: hidden;
 }
 
 .search-bar {
@@ -379,5 +426,27 @@ onMounted(() => {
   .author {
     font-size: 12px;
   }
+
+  .title {
+    font-size: 18px;
+    position: static;
+    transform: none;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .back-btn {
+    padding: 6px 12px;
+  }
+
+  .placeholder {
+    display: none;
+  }
+
+  .page-header {
+    justify-content: flex-start;
+    gap: 15px;
+  }
 }
 </style>
+[/content]

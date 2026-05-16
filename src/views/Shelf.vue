@@ -183,8 +183,23 @@ const goToDetail = (novelId) => {
 }
 
 // 继续阅读
-const continueRead = (item) => {
+const continueRead = async (item) => {
   const chapterNum = item.lastReadChapterNum || 1
+  
+  // 记录阅读行为（用于推荐系统）
+  const userId = localStorage.getItem('userId')
+  if (userId) {
+    try {
+      await request.post('/recommend/behavior', {
+        userId: Number(userId),
+        novelId: item.novelId,
+        behaviorType: 'read_chapter'
+      })
+    } catch (e) {
+      console.error('记录行为失败:', e)
+    }
+  }
+  
   router.push(`/read/${item.novelId}/${chapterNum}`)
 }
 

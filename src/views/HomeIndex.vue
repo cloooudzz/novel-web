@@ -28,6 +28,8 @@
         </el-col>
       </el-row>
     </div>
+
+    <PersonalRecommend />
   </div>
 </template>
 
@@ -35,6 +37,7 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import request from '@/utils/request'
+import PersonalRecommend from '@/components/PersonalRecommend.vue' 
 
 
 // 轮播图数据（从数据库获取）
