@@ -34,6 +34,11 @@ const routes = [
     name: 'Register',
     component: () => import('@/views/Register.vue') // 注册页
   },
+  {
+  path: '/search',
+  name: 'Search',
+  component: () => import('@/views/Search.vue')
+  }
 
 ]
 

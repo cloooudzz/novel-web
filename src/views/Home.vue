@@ -12,8 +12,20 @@
         </nav>
       </div>
       <div class="header-right">
-        <el-input placeholder="搜索小说" class="search-box" prefix-icon="Search" />
-        
+        <el-input 
+          v-model="searchKeyword" 
+          placeholder="搜索小说" 
+          class="search-box" 
+
+          @keyup.enter="handleSearch"
+        >
+          <template #prefix>
+            <img src="@/assets/搜索.png" class="search-icon" alt="搜索" />
+          </template>
+          <template #append>
+            <el-button @click="handleSearch">搜索</el-button>
+          </template>
+        </el-input>
         <div v-if="isLogin" class="user-dropdown">
           <el-dropdown trigger="hover" @command="handleDropdownCommand" placement="bottom">
             <div class="user-info" style="cursor: pointer;">
@@ -58,6 +70,18 @@ const getFullAvatarUrl = (avatar) => {
     return avatar
   }
   return `http://localhost:8080${avatar}`
+}
+
+
+const searchKeyword = ref('')
+
+const handleSearch = () => {
+  const keyword = searchKeyword.value.trim()
+  if (!keyword) {
+    ElMessage.warning('请输入搜索关键词')
+    return
+  }
+  router.push({ path: '/search', query: { keyword: keyword } })
 }
 
 // 用户信息状态（响应式）
@@ -123,6 +147,7 @@ const handleStorageChange = (e) => {
   }
 }
 
+
 // 处理下拉菜单命令
 const handleDropdownCommand = (command) => {
   if (command === 'logout') {
@@ -178,6 +203,14 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+
+.search-icon {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+
+}
+
 /* 核心样式：解决下拉菜单被遮挡/不显示问题 */
 .header-right {
   display: flex;
@@ -279,5 +312,6 @@ onUnmounted(() => {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+  
 }
 </style>

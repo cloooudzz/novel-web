@@ -199,8 +199,8 @@ onMounted(() => {
 }
 
 .category-group { 
-  margin-top: 10px;
-  margin-bottom: 30px;
+  margin-top: 0px;
+  margin-bottom: 5px;
 }
 
 .loading-container {

@@ -38,6 +38,7 @@ const rules = ref({
   password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
 })
 
+// 修改 login 函数
 const login = async () => {
   await formRef.value.validate()
   loading.value = true
@@ -46,8 +47,24 @@ const login = async () => {
     if (res.code === 200) {
       ElMessage.success('登录成功')
       localStorage.setItem('user', form.value.username)
-      localStorage.setItem('userId', res.userId)  // 保存 userId
-      // 不用强制刷新，用路由跳转，避免白屏
+      localStorage.setItem('userId', res.userId)
+      
+      // 获取用户完整信息（包括头像）
+      try {
+        const userInfoRes = await request.get('/user/current', {
+          params: { userId: res.userId }
+        })
+        if (userInfoRes.code === 200 && userInfoRes.data.avatar) {
+          localStorage.setItem('userAvatar', userInfoRes.data.avatar)
+        } else {
+          // 没有头像就清除旧的
+          localStorage.removeItem('userAvatar')
+        }
+      } catch (err) {
+        console.error('获取用户信息失败:', err)
+        localStorage.removeItem('userAvatar')
+      }
+      
       router.push('/')
     } else {
       ElMessage.error(res.msg || '登录失败')
