@@ -38,6 +38,16 @@ const routes = [
   path: '/search',
   name: 'Search',
   component: () => import('@/views/Search.vue')
+  },
+  {
+    path: '/writer',           // 添加作家页面路由
+    name: 'Writer',
+    component: () => import('@/views/Writer.vue') // 作家申请页
+  },
+  {
+    path: '/writer-helper',
+    name: 'WriterHelper',
+    component: () => import('@/views/WriterHelper.vue')
   }
 
 ]

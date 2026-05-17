@@ -1,17 +1,19 @@
 <template>
   <div class="login-page">
     <el-card class="login-card">
-      <h2 class="title">用户登录</h2>
+      <h2 class="title">账号登录</h2>
       <el-form :model="form" :rules="rules" ref="formRef" label-width="80px">
-        <el-form-item label="用户名" prop="username">
-          <el-input v-model="form.username" placeholder="请输入用户名" />
+        <el-form-item label="账号" prop="account">
+          <el-input v-model="form.account" placeholder="请输入账号" />
         </el-form-item>
         <el-form-item label="密码" prop="password">
-          <el-input v-model="form.password" type="password" placeholder="请输入密码" />
+          <el-input v-model="form.password" type="password" placeholder="请输入密码" show-password />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="login" :loading="loading">登录</el-button>
-          <el-button @click="$router.push('/register')">去注册</el-button>
+          <div class="button-group">
+            <el-button type="primary" @click="login" :loading="loading" class="btn">登录</el-button>
+            <el-button @click="$router.push('/register')" class="btn">去注册</el-button>
+          </div>
         </el-form-item>
       </el-form>
     </el-card>
@@ -29,24 +31,41 @@ const formRef = ref()
 const loading = ref(false)
 
 const form = ref({
-  username: '',
+  account: '',
   password: ''
 })
 
-const rules = ref({
-  username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-  password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
-})
+// 表单验证规则
+const rules = {
+  account: [
+    { required: true, message: '请输入账号', trigger: 'blur' },
+    { min: 3, max: 20, message: '账号长度应为3-20位', trigger: 'blur' }
+  ],
+  password: [
+    { required: true, message: '请输入密码', trigger: 'blur' },
+    { min: 6, message: '密码长度不能少于6位', trigger: 'blur' }
+  ]
+}
 
-// 修改 login 函数
 const login = async () => {
-  await formRef.value.validate()
+  // 触发表单验证
+  try {
+    await formRef.value.validate()
+  } catch (error) {
+    return  // 验证失败，不继续执行
+  }
+
   loading.value = true
   try {
-    const res = await request.post('/user/login', form.value)
+    const res = await request.post('/user/login', {
+      account: form.value.account,
+      password: form.value.password
+    })
+    
     if (res.code === 200) {
       ElMessage.success('登录成功')
-      localStorage.setItem('user', form.value.username)
+      localStorage.setItem('account', res.account || form.value.account)
+      localStorage.setItem('username', res.username)
       localStorage.setItem('userId', res.userId)
       
       // 获取用户完整信息（包括头像）
@@ -57,7 +76,6 @@ const login = async () => {
         if (userInfoRes.code === 200 && userInfoRes.data.avatar) {
           localStorage.setItem('userAvatar', userInfoRes.data.avatar)
         } else {
-          // 没有头像就清除旧的
           localStorage.removeItem('userAvatar')
         }
       } catch (err) {
@@ -85,18 +103,29 @@ const login = async () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f9f9f9;
   position: fixed;
   top: 0;
   left: 0;
 }
 .login-card {
-  width: 420px;
+  width: 450px;
+  border-radius: 16px;
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
   padding: 30px;
 }
 .title {
   text-align: center;
   margin-bottom: 24px;
-  font-size: 22px;
+  font-size: 24px;
+  color: #333;
+  font-weight: 600;
+}
+.button-group {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+.btn {
+  flex: 1;
 }
 </style>

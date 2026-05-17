@@ -60,13 +60,13 @@ import { ref, onMounted, inject } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import request from '@/utils/request'
 
-// 注入父组件提供的更新方法（添加默认值避免报错）
+// 注入父组件提供的更新方法
 const updateUserInfo = inject('updateUserInfo', (key, value) => {
   console.warn('updateUserInfo not provided, using fallback')
   if (key === 'username') {
-    localStorage.setItem('user', value)
+    localStorage.setItem('username', value)
     window.dispatchEvent(new StorageEvent('storage', {
-      key: 'user',
+      key: 'username',
       newValue: value
     }))
   } else if (key === 'avatar') {
@@ -80,8 +80,8 @@ const updateUserInfo = inject('updateUserInfo', (key, value) => {
 
 // 用户头像
 const userAvatar = ref('https://picsum.photos/id/64/100/100')
-// 当前用户名
-const currentUsername = ref(localStorage.getItem('user') || '')
+// 当前用户名 - 使用 'username' 而不是 'user'
+const currentUsername = ref(localStorage.getItem('username') || '')
 
 // 密码表单相关
 const passwordFormRef = ref()
@@ -291,11 +291,10 @@ const beforeAvatarUpload = (file) => {
 // 初始化用户信息
 const initUserInfo = async () => {
   const userId = localStorage.getItem('userId')
-  const username = localStorage.getItem('user')
+  const username = localStorage.getItem('username')
   
   if (!username) {
     ElMessage.warning('请先登录')
-    // 不自动跳转，让用户手动点击
     return
   }
   
@@ -312,7 +311,7 @@ const initUserInfo = async () => {
       if (res.code === 200) {
         if (res.data.username) {
           currentUsername.value = res.data.username
-          localStorage.setItem('user', res.data.username)
+          localStorage.setItem('username', res.data.username)
         }
         if (res.data.avatar) {
           const avatarUrl = res.data.avatar
@@ -336,7 +335,6 @@ onMounted(() => {
   initUserInfo()
 })
 </script>
-
 
 <style scoped>
 .user-page {
