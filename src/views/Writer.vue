@@ -178,7 +178,6 @@ const submitApplication = async () => {
     
     try {
       const res = await request.post('/author/apply', {
-        userId: Number(userId),
         penName: form.value.penName,
         contact: form.value.contact,
         genre: form.value.genre,

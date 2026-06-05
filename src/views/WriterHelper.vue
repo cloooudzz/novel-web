@@ -380,7 +380,7 @@ const fetchAuthorInfo = async () => {
   if (!userId) return
   
   try {
-    const res = await request.get('/author/info', { params: { userId: Number(userId) } })
+    const res = await request.get('/author/info')
     if (res.code === 200 && res.data) {
       penName.value = res.data.penName
     }
@@ -396,7 +396,7 @@ const fetchNovels = async () => {
   
   novelsLoading.value = true
   try {
-    const res = await request.get('/author/novels', { params: { userId: Number(userId) } })
+    const res = await request.get('/author/novels')
     if (res.code === 200) {
       novels.value = res.data || []
     }
@@ -407,6 +407,7 @@ const fetchNovels = async () => {
     novelsLoading.value = false
   }
 }
+
 
 // 获取分类列表
 const fetchCategories = async () => {
@@ -497,7 +498,6 @@ const saveNovel = async () => {
     } else {
       // 创建模式：先创建小说（不传封面）
       res = await request.post('/author/novel/create', {
-        userId: Number(userId),
         title: novelForm.value.title,
         authorName: penName.value,
         categoryId: novelForm.value.categoryId,
@@ -544,10 +544,9 @@ const deleteNovel = (novel) => {
     cancelButtonText: '取消',
     type: 'warning'
   }).then(async () => {
-    const userId = localStorage.getItem('userId')
     try {
       const res = await request.delete('/author/novel/delete', {
-        params: { novelId: novel.id, userId: Number(userId) }
+        params: { novelId: novel.id }
       })
       if (res.code === 200) {
         ElMessage.success('删除成功')

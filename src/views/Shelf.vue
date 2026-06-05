@@ -161,9 +161,7 @@ const fetchShelfList = async () => {
 
   loading.value = true
   try {
-    const res = await request.get('/bookshelf/list', {
-      params: { userId: Number(userId) }
-    })
+    const res = await request.get('/bookshelf/list')
     
     if (res.code === 200) {
       shelfList.value = res.data || []
@@ -183,15 +181,15 @@ const goToDetail = (novelId) => {
 }
 
 // 继续阅读
+
 const continueRead = async (item) => {
   const chapterNum = item.lastReadChapterNum || 1
   
-  // 记录阅读行为（用于推荐系统）
+  // 记录阅读行为
   const userId = localStorage.getItem('userId')
   if (userId) {
     try {
       await request.post('/recommend/behavior', {
-        userId: Number(userId),
         novelId: item.novelId,
         behaviorType: 'read_chapter'
       })
@@ -224,15 +222,11 @@ const removeFromShelf = async (item) => {
 
   try {
     const res = await request.delete('/bookshelf/remove', {
-      params: {
-        userId: Number(userId),
-        novelId: item.novelId
-      }
+      params: { novelId: item.novelId }
     })
     
     if (res.code === 200) {
       ElMessage.success('已从书架移除')
-      // 从列表中删除
       shelfList.value = shelfList.value.filter(
         b => b.bookshelfId !== item.bookshelfId
       )

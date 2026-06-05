@@ -174,26 +174,20 @@ const fetchBookshelfDetail = async () => {
   }
   
   try {
-    const res = await request.get('/bookshelf/list', {
-      params: { userId: Number(userId) }
-    })
+    const res = await request.get('/bookshelf/list')
     
     if (res.code === 200 && res.data) {
       const shelfItem = res.data.find(item => item.novelId == novelId)
       
       if (shelfItem) {
         inBookshelf.value = true
-        
         const progress = shelfItem.lastReadChapterNum || 1
         readProgress.value = progress
         hasReadRecord.value = progress > 1
-        
         const chapter = chapters.value.find(c => c.chapterNum === progress)
         if (chapter) {
           readProgressTitle.value = chapter.title
         }
-        
-        console.log(`书架详情: 进度=${readProgress.value}, 在书架=${inBookshelf.value}`)
       } else {
         inBookshelf.value = false
         readProgress.value = 1
@@ -202,9 +196,6 @@ const fetchBookshelfDetail = async () => {
     }
   } catch (error) {
     console.error('获取书架详情失败:', error)
-    inBookshelf.value = false
-    readProgress.value = 1
-    hasReadRecord.value = false
   }
 }
 
@@ -380,8 +371,8 @@ const addToShelf = async () => {
 
   shelfLoading.value = true
   try {
+    // 去掉 userId，token 会自动带上
     const res = await request.post('/bookshelf/add', {
-      userId: Number(userId),
       novelId: Number(novelId)
     })
     

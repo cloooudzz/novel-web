@@ -405,7 +405,6 @@ const toggleBookshelf = async () => {
   
   try {
     const res = await request.post('/bookshelf/add', {
-      userId: Number(userId),
       novelId: novelId.value
     })
     
@@ -450,17 +449,13 @@ const fetchChapterContent = async () => {
   try {
     console.log(`获取章节: novelId=${novelId.value}, chapterNum=${chapterNum.value}`)
     
-    const userId = localStorage.getItem('userId')
-    const params = {
-      novelId: novelId.value,
-      chapterNum: chapterNum.value
-    }
-    
-    if (userId) {
-      params.userId = Number(userId)
-    }
-    
-    const res = await request.get('/novel/chapter/detail', { params })
+    // 不再手动传 userId，token 会自动带上
+    const res = await request.get('/novel/chapter/detail', {
+      params: {
+        novelId: novelId.value,
+        chapterNum: chapterNum.value
+      }
+    })
     
     console.log('章节响应:', res)
     
@@ -473,17 +468,11 @@ const fetchChapterContent = async () => {
       
       prevChapterNum.value = data.prevChapterNum || null
       prevChapterTitle.value = data.prevChapterTitle || ''
-      
       nextChapterNum.value = data.nextChapterNum || null
       nextChapterTitle.value = data.nextChapterTitle || ''
       
       selectedChapter.value = chapterNum.value
-      
       window.scrollTo(0, 0)
-      
-      if (userId) {
-        updateReadProgress()
-      }
     } else {
       ElMessage.error(res.msg || '获取章节失败')
       useMockContent()
@@ -503,7 +492,6 @@ const updateReadProgress = async () => {
   
   try {
     await request.post('/bookshelf/progress', {
-      userId: Number(userId),
       novelId: novelId.value,
       chapterNum: chapterNum.value
     })

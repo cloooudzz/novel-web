@@ -1,15 +1,12 @@
 <template>
   <div class="bookstore">
-    <h2 class="title">全部小说书城</h2>
-    
+    <h2 class="title">小说书城</h2>
     <!-- 加载状态 -->
     <div v-if="loading" class="loading-container">
       <el-skeleton :rows="3" animated />
     </div>
-
     <!-- 小说列表 -->
     <div v-else>
-      <div class="book-count">共 {{ bookList.length }} 本小说</div>
       <el-row :gutter="20">
         <el-col :span="6" v-for="item in bookList" :key="item.id">
           <el-card class="card" shadow="hover" @click="goToDetail(item.id)">

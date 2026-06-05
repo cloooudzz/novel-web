@@ -271,7 +271,6 @@ const replyInputRef = ref(null)
 // ==================== API 调用 ====================
 
 // 获取评论列表
-// 获取评论列表
 const fetchComments = async () => {
   loading.value = true
   try {
@@ -281,9 +280,6 @@ const fetchComments = async () => {
       page: currentPage.value,
       pageSize: pageSize.value,
       sortType: sortType.value
-    }
-    if (currentUserId.value) {
-      params.userId = currentUserId.value
     }
     
     const res = await request.get('/comment/list', { params })
@@ -336,7 +332,6 @@ const submitComment = async () => {
   submitting.value = true
   try {
     const res = await request.post('/comment/add', {
-      userId: currentUserId.value,
       novelId: props.novelId,
       chapterNum: props.chapterNum,
       content: newComment.value.trim()
@@ -433,7 +428,6 @@ const submitReply = async (parentId) => {
   submittingReply.value = true
   try {
     const res = await request.post('/comment/add', {
-      userId: currentUserId.value,
       novelId: props.novelId,
       chapterNum: props.chapterNum,
       content: content,
@@ -469,8 +463,7 @@ const handleLike = async (commentId) => {
   
   try {
     const res = await request.post('/comment/like', {
-      commentId: commentId,
-      userId: currentUserId.value
+      commentId: commentId
     })
     
     if (res.code === 200) {
@@ -520,8 +513,7 @@ const handleDelete = async (commentId) => {
   try {
     const res = await request.delete('/comment/delete', {
       params: {
-        commentId: commentId,
-        userId: currentUserId.value
+        commentId: commentId
       }
     })
     

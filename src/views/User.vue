@@ -149,33 +149,16 @@ const updateUsername = async () => {
   }
   
   usernameUpdateLoading.value = true
-  const userId = localStorage.getItem('userId')
-  
-  if (!userId) {
-    ElMessage.error('用户信息丢失，请重新登录')
-    usernameUpdateLoading.value = false
-    return
-  }
   
   try {
-    const res = await request({
-      method: 'post',
-      url: '/user/update-username',
-      params: {
-        userId: Number(userId),
-        newUsername: usernameForm.value.newUsername
-      }
+    const res = await request.post('/user/update-username', null, {
+      params: { newUsername: usernameForm.value.newUsername }
     })
     
     if (res.code === 200) {
-      // 使用注入的方法更新用户名
       updateUserInfo('username', res.newUsername)
-      
-      // 更新当前显示的用户名
       currentUsername.value = res.newUsername
-      
       ElMessage.success('用户名修改成功')
-      // 清空表单
       usernameForm.value.newUsername = ''
     } else {
       ElMessage.error(res.msg || '用户名修改失败')
@@ -188,22 +171,15 @@ const updateUsername = async () => {
   }
 }
 
+
 // 修改密码
 const updatePassword = async () => {
   await passwordFormRef.value.validate()
   updateLoading.value = true
-  const userId = localStorage.getItem('userId')
-  if (!userId) {
-    ElMessage.error('用户信息丢失，请重新登录')
-    updateLoading.value = false
-    return
-  }
+  
   try {
-    const res = await request({
-      method: 'post',
-      url: '/user/update-password',
+    const res = await request.post('/user/update-password', null, {
       params: {
-        userId: Number(userId),
         oldPassword: passwordForm.value.oldPassword,
         newPassword: passwordForm.value.newPassword
       }
@@ -228,6 +204,7 @@ const updatePassword = async () => {
   }
 }
 
+
 // 头像上传方法
 const avatarUpload = async (options) => {
   const userId = localStorage.getItem('userId')
@@ -237,8 +214,7 @@ const avatarUpload = async (options) => {
   }
   
   const formData = new FormData()
-  formData.append('userId', userId)
-  formData.append('avatar', options.file)
+  formData.append('avatar', options.file)  
   
   try {
     const res = await request({
@@ -254,14 +230,9 @@ const avatarUpload = async (options) => {
     
     if (res.code === 200) {
       const avatarUrl = res.data.avatarUrl
-      
-      // 使用注入的方法更新头像
       updateUserInfo('avatar', avatarUrl)
-      
-      // 更新当前显示
       const fullAvatarUrl = avatarUrl.startsWith('http') ? avatarUrl : `http://localhost:8080${avatarUrl}`
       userAvatar.value = fullAvatarUrl
-      
       ElMessage.success('头像上传成功')
     } else {
       ElMessage.error(res.msg || '头像上传失败')
@@ -272,17 +243,18 @@ const avatarUpload = async (options) => {
   }
 }
 
+
 // 头像上传前校验
 const beforeAvatarUpload = (file) => {
   const isImage = file.type.startsWith('image/')
-  const isLt2M = file.size / 1024 / 1024 < 2
+  const isLt2M = file.size / 1024 / 1024 < 10
 
   if (!isImage) {
     ElMessage.error('只能上传图片格式文件！')
     return false
   }
   if (!isLt2M) {
-    ElMessage.error('头像图片大小不能超过 2MB！')
+    ElMessage.error('头像图片大小不能超过 10MB！')
     return false
   }
   return true
@@ -302,11 +274,7 @@ const initUserInfo = async () => {
   
   if (userId) {
     try {
-      const res = await request({
-        method: 'get',
-        url: '/user/current',
-        params: { userId: userId }
-      })
+      const res = await request.get('/user/current')
       
       if (res.code === 200) {
         if (res.data.username) {

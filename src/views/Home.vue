@@ -123,9 +123,8 @@ const checkAuthorStatus = async () => {
     return
   }
   try {
-    const res = await request.get('/author/check', {
-      params: { userId: Number(userId) }
-    })
+    // 去掉 params，token 会自动带上，后端从 request 获取 userId
+    const res = await request.get('/author/check')
     if (res.code === 200) {
       isAuthor.value = res.isAuthor
     }
@@ -194,9 +193,9 @@ const handleDropdownCommand = (command) => {
 
 // 退出登录
 const logout = () => {
+  localStorage.removeItem('token')  // 新增
   localStorage.removeItem('username')
   localStorage.removeItem('account')
-  localStorage.removeItem('token')
   localStorage.removeItem('userId')
   localStorage.removeItem('userAvatar')
   

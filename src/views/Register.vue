@@ -136,11 +136,19 @@ const register = async () => {
   position: fixed;
   top: 0;
   left: 0;
+  background-image: url('@/assets/背景.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
 }
 .register-card {
   width: 450px;
   border-radius: 16px;
   box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
 }
 .title {
   text-align: center;

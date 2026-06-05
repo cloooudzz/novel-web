@@ -40,14 +40,14 @@ const routes = [
   component: () => import('@/views/Search.vue')
   },
   {
-    path: '/writer',           // 添加作家页面路由
+    path: '/writer',         
     name: 'Writer',
     component: () => import('@/views/Writer.vue') // 作家申请页
   },
   {
     path: '/writer-helper',
     name: 'WriterHelper',
-    component: () => import('@/views/WriterHelper.vue')
+    component: () => import('@/views/WriterHelper.vue')//作家创作页面
   }
 
 ]

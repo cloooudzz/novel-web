@@ -7,9 +7,6 @@
           <el-icon><StarFilled /></el-icon>
           {{ '猜你喜欢' }}
         </h3>
-        <span class="subtitle" v-if="preferences.length > 0">
-          基于你的阅读偏好
-        </span>
       </div>
       <el-button text @click="refreshRecommend" :loading="loading">
         <el-icon><Refresh /></el-icon> 换一批
@@ -18,7 +15,7 @@
 
     <!-- 用户偏好标签展示 -->
     <div class="preference-tags" v-if="preferences.length > 0 && showTags">
-      <span class="tags-label">你的阅读偏好：</span>
+      <span class="tags-label">你的阅读喜好：</span>
       <el-tag 
         v-for="tag in preferences" 
         :key="tag.tagName"
