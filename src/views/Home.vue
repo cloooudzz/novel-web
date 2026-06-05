@@ -343,4 +343,126 @@ onUnmounted(() => {
   margin: 0 auto;
   padding: 20px;
 }
+
+@media (max-width: 992px) {
+  .header {
+    padding: 0 15px;
+    height: auto;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 15px;
+  }
+  
+  .header-left {
+    flex: 1;
+    gap: 15px;
+  }
+  
+  .logo {
+    font-size: 18px;
+  }
+  
+  .nav {
+    gap: 5px;
+  }
+  
+  .nav .el-button {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+  
+  .header-right {
+    flex: 1;
+    justify-content: flex-end;
+  }
+  
+  .search-box {
+    width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 10px;
+  }
+  
+  .header-left {
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .logo {
+    font-size: 16px;
+  }
+  
+  .nav {
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  
+  .nav .el-button {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+  
+  .header-right {
+    justify-content: space-between;
+    margin-top: 5px;
+  }
+  
+  .search-box {
+    width: calc(100% - 120px);
+  }
+  
+  .user-info {
+    padding: 2px 5px;
+  }
+  
+  .username {
+    display: none;
+  }
+  
+  .avatar {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .main {
+    padding: 15px;
+  }
+  
+  :deep(.el-dropdown-menu) {
+    min-width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    font-size: 14px;
+  }
+  
+  .nav .el-button {
+    padding: 3px 6px;
+    font-size: 11px;
+  }
+  
+  .search-box {
+    width: calc(100% - 100px);
+  }
+  
+  .search-box :deep(.el-input__inner) {
+    font-size: 12px;
+  }
+  
+  .search-box :deep(.el-button) {
+    padding: 8px 10px;
+  }
+  
+  .auth-buttons .el-button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}
 </style>

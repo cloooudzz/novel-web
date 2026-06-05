@@ -700,6 +700,7 @@ onMounted(() => {
   padding: 20px;
   max-width: 1400px;
   margin: 0 auto;
+  min-height: calc(100vh - 100px);
 }
 
 .writer-header {
@@ -820,6 +821,10 @@ onMounted(() => {
   display: flex;
   gap: 10px;
   margin-top: auto;
+}
+
+.card-actions .el-button {
+  flex: 1;
 }
 
 /* 章节管理区域 */
@@ -980,6 +985,102 @@ onMounted(() => {
 :deep(.el-textarea__inner) {
   font-family: inherit;
   line-height: 1.6;
+}
+
+/* 空状态样式 */
+:deep(.el-empty) {
+  padding: 40px 0;
+}
+
+/* 响应式 */
+@media (max-width: 1000px) {
+  .novel-cards {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .chapter-header-row,
+  .chapter-row {
+    grid-template-columns: 60px 1fr 60px 80px 80px;
+    font-size: 12px;
+    gap: 4px;
+  }
+}
+
+@media (max-width: 768px) {
+  .writer-helper {
+    padding: 12px;
+  }
+  
+  .writer-header {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  
+  .header-left h2 {
+    font-size: 20px;
+  }
+  
+  .pen-name {
+    font-size: 12px;
+  }
+  
+  .header-right {
+    width: 100%;
+  }
+  
+  .header-right .el-button {
+    width: 100%;
+  }
+  
+  .novel-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+    gap: 12px;
+  }
+  
+  .card-cover img {
+    width: 120px;
+    height: 160px;
+  }
+  
+  .card-info h3 {
+    font-size: 16px;
+  }
+  
+  .card-info .intro {
+    font-size: 12px;
+    -webkit-line-clamp: 2;
+  }
+  
+  .stats {
+    justify-content: center;
+  }
+  
+  .card-actions {
+    justify-content: center;
+  }
+  
+  .manager-header {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+  
+  .chapter-header-row,
+  .chapter-row {
+    grid-template-columns: 50px 1fr 45px 60px 65px;
+    font-size: 11px;
+    padding: 8px 10px;
+  }
+  
+  .cover-upload {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 /* 响应式 */

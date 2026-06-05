@@ -243,7 +243,7 @@ const inBookshelf = ref(false)
 const catalogCollapsed = ref(true)
 
 // 工具栏折叠状态
-const toolbarCollapsed = ref(false)
+const toolbarCollapsed = ref(true)
 
 // 主题模式：light, warm, dark
 const themeMode = ref(localStorage.getItem('readTheme') || 'light')
@@ -1427,53 +1427,109 @@ onUnmounted(() => {
 /* 响应式 */
 @media (max-width: 768px) {
   .side-catalog {
-    width: 240px;
+    width: 220px;
+    top: auto;
+    transform: none;
+    top: 20px;
+    max-height: calc(100vh - 40px);
   }
-  
   .side-catalog.collapsed {
     width: 40px;
+    top: 20px;
+    transform: none;
   }
-  
   .catalog-expand-btn {
     width: 40px;
     height: 40px;
+    margin-top: 0;
   }
-  
   .side-toolbar {
-    width: 240px;
+    width: 220px;
+    top: auto;
+    transform: none;
+    top: 20px;
+    max-height: calc(100vh - 40px);
   }
-  
   .side-toolbar.collapsed {
     width: 40px;
+    top: 20px;
+    transform: none;
   }
-  
   .toolbar-expand-btn {
     width: 40px;
     height: 40px;
   }
-  
   .read-toolbar {
-    flex-direction: column;
-    gap: 15px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 8px 10px;
   }
-  
+  .read-toolbar .el-button:first-child {
+    order: 1;
+  }
   .toolbar-center {
-    order: -1;
+    order: 0;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 5px;
   }
-  
+  .toolbar-right {
+    order: 2;
+    margin-left: auto;
+  }
+  .toolbar-center h3 {
+    font-size: 15px;
+    margin: 0;
+  }
+  .chapter-info {
+    font-size: 11px;
+  }
+  .toolbar-right .el-button-group .el-button {
+    padding: 0 10px;
+    font-size: 12px;
+    height: 30px;
+  }
   .chapter-nav {
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
   }
-  
   .nav-item {
     max-width: 100%;
-    width: 100%;
-    text-align: center !important;
+    text-align: center;
   }
-  
+  .chapter-title {
+    font-size: 22px;
+  }
   .content {
     font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .read-toolbar {
+    gap: 4px;
+    padding: 6px 8px;
+  }
+  .toolbar-center {
+    margin-bottom: 4px;
+  }
+  .toolbar-center h3 {
+    font-size: 13px;
+  }
+  .chapter-info {
+    font-size: 10px;
+  }
+  .toolbar-right .el-button-group .el-button {
+    padding: 0 8px;
+    font-size: 11px;
+    height: 28px;
+  }
+  .chapter-title {
+    font-size: 18px;
+  }
+  .content {
+    font-size: 14px;
   }
 }
 </style>

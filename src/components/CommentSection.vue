@@ -807,17 +807,175 @@ onMounted(() => {
 
 /* 响应式 */
 @media (max-width: 768px) {
-  .replies-list {
-    margin-left: 0;
-    padding-left: 12px;
+  .comment-section {
+    margin-top: 20px;
+    padding-top: 10px;
+  }
+  
+  .comment-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .comment-header h3 {
+    font-size: 16px;
+  }
+  
+  .comment-input-area {
+    gap: 10px;
+  }
+  
+  .comment-avatar {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .input-wrapper :deep(.el-textarea__inner) {
+    min-height: 80px;
+    font-size: 14px;
+  }
+  
+  .input-actions .el-button {
+    width: 100%;
+    padding: 10px;
+  }
+  
+  .comment-main {
+    gap: 10px;
+  }
+  
+  .comment-user {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .username {
+    font-size: 14px;
+  }
+  
+  .comment-time {
+    font-size: 11px;
+  }
+  
+  .comment-text {
+    font-size: 13px;
+    line-height: 1.5;
   }
   
   .comment-actions {
     gap: 12px;
+    flex-wrap: wrap;
+  }
+  
+  .action-btn {
+    font-size: 12px;
+    padding: 4px 0;
+  }
+  
+  .replies-list {
+    margin-left: 0;
+    padding-left: 8px;
+    margin-top: 12px;
   }
   
   .reply-item {
-    padding: 10px;
+    padding: 8px;
+    gap: 8px;
+    min-height: 60px;
+  }
+  
+  .reply-avatar {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .reply-user {
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  
+  .reply-text {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+  
+  .reply-actions {
+    gap: 8px;
+  }
+  
+  .reply-actions .el-button {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+  
+  .reply-input :deep(.el-textarea__inner) {
+    min-height: 60px;
+    font-size: 13px;
+  }
+  
+  .view-more-replies {
+    padding: 8px 10px;
+    font-size: 12px;
+    min-height: 36px;
+  }
+  
+  .pagination-wrapper {
+    margin-top: 20px;
+  }
+  
+  .pagination-wrapper :deep(.el-pagination) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .pagination-wrapper :deep(.el-pagination .btn-prev),
+  .pagination-wrapper :deep(.el-pagination .btn-next) {
+    padding: 0 8px;
+    min-width: 32px;
+    height: 32px;
+  }
+  
+  .pagination-wrapper :deep(.el-pager li) {
+    min-width: 32px;
+    height: 32px;
+    line-height: 32px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .comment-section {
+    margin-top: 15px;
+  }
+  
+  .comment-header h3 {
+    font-size: 14px;
+  }
+  
+  .comment-avatar {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .username {
+    font-size: 13px;
+  }
+  
+  .comment-text {
+    font-size: 12px;
+  }
+  
+  .action-btn {
+    font-size: 11px;
+  }
+  
+  .reply-item {
+    padding: 6px;
+  }
+  
+  .reply-text {
+    font-size: 11px;
   }
 }
 </style>

@@ -375,26 +375,9 @@ onMounted(() => {
 }
 
 /* 响应式 */
-@media (max-width: 768px) {
-  .item-main {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .cover {
-    width: 120px;
-    height: 156px;
-  }
-  
-  .item-footer {
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .progress-info {
-    flex-direction: column;
-    gap: 5px;
+@media (max-width: 480px) {
+  .intro{
+    display: none;
   }
 }
 </style>

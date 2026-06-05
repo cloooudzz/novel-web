@@ -164,4 +164,42 @@ onMounted(() => {
 .loading-container {
   padding: 40px 0;
 }
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 20px;
+    text-align: center;
+  }
+  .cover {
+    aspect-ratio: 3 / 4;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+  }
+  .novel-title {
+    font-size: 14px;
+    margin: 6px 0 4px;
+    text-align: center;
+  }
+  .author, .novel-info, .id-info {
+    display: none;
+  }
+  .card :deep(.el-card__body) {
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cover {
+    aspect-ratio: 3 / 4;
+    height: auto;
+  }
+  .novel-title {
+    font-size: 13px;
+    margin: 5px 0 3px;
+  }
+  .card :deep(.el-card__body) {
+    padding: 6px;
+  }
+}
 </style>

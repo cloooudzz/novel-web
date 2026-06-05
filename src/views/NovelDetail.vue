@@ -575,4 +575,132 @@ onMounted(async () => {
   align-items: center;
   justify-content: space-between;
 }
+@media (max-width: 768px) {
+  .back-header {
+    margin-left: 0;
+    margin-bottom: 0px;
+  }
+  .back-btn {
+    padding: 0px 0px;
+    font-size: 14px;
+  }
+  .page-title {
+    font-size: 16px;
+    position: static;
+    transform: none;
+  }
+  .placeholder {
+    display: none;
+  }
+  .book-info {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    gap: 20px;
+  }
+  .cover {
+    aspect-ratio: 3 / 4;
+    width: 160px;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+  }
+  .info h1 {
+    font-size: 22px;
+    margin-bottom: 15px;
+  }
+  .info p {
+    font-size: 13px;
+    text-align: left;
+  }
+  .intro {
+    font-size: 13px;
+    margin: 15px 0;
+    padding: 12px;
+    text-align: left;
+  }
+  .button-group {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  .button-group .el-button {
+    min-width: 120px;
+    height: 40px;
+  }
+  .chapter-list {
+    padding: 15px;
+    margin-top: 20px;
+  }
+  .chapter-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .chapter-header h2 {
+    font-size: 18px;
+  }
+  .chapter-grid {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    max-height: 500px;
+  }
+  .chapter-item {
+    padding: 10px;
+  }
+  .chapter-title {
+    font-size: 13px;
+  }
+  .chapter-title .el-tag {
+    font-size: 10px;
+    height: 20px;
+    line-height: 18px;
+    padding: 0 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .detail {
+    padding: 5px 0;
+  }
+  .back-btn {
+    margin-left: 10px;
+    font-size: 13px;
+  }
+  .page-title {
+    font-size: 14px;
+    justify-content: center;
+  }
+  .book-info {
+    padding:10px;
+    gap: 15px;
+  }
+  .cover {
+    aspect-ratio: 3 / 4;
+    width: 140px;
+    height: auto;
+  }
+  .info h1 {
+    font-size: 18px;
+  }
+  .info p {
+    font-size: 12px;
+  }
+  .intro {
+    font-size: 12px;
+    padding: 10px;
+  }
+  .button-group .el-button {
+    min-width: 100px;
+    height: 36px;
+    font-size: 13px;
+  }
+  .chapter-header h2 {
+    font-size: 16px;
+  }
+  .chapter-title {
+    font-size: 12px;
+  }
+}
 </style>

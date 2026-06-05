@@ -304,15 +304,46 @@ onMounted(() => {
 }
 
 /* 响应式 */
-@media (max-width: 900px) {
-  .recommend-list {
-    grid-template-columns: repeat(2, 1fr);
+@media (max-width: 768px) {
+  .recommend-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .title {
+    font-size: 16px;
+  }
+  .recommend-item .cover {
+    aspect-ratio: 3 / 4;
+    width: 55px;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+  }
+  .novel-title {
+    font-size: 13px;
+    margin: 4px 0;
+    text-align: center;
+  }
+ .meta, .view-count {
+    display: none;
+  }
+  .recommend-item {
+    padding: 6px;
   }
 }
 
-@media (max-width: 600px) {
-  .recommend-list {
-    grid-template-columns: 1fr;
+@media (max-width: 480px) {
+  .recommend-item .cover {
+    aspect-ratio: 3 / 4;
+    width: 60px;
+    height: auto;
+  }
+  .novel-title {
+    font-size: 12px;
+  }
+  .recommend-item {
+    padding: 4px;
   }
 }
 </style>

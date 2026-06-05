@@ -156,4 +156,113 @@ onMounted(() => {
 .cover { width:100%; height:240px; object-fit:cover; }
 .novel-title { font-size:15px; margin:8px 0 4px; }
 .author { font-size:12px; color:#999; }
+
+@media (max-width: 768px) {
+  .carousel-wrapper {
+    border-radius: 8px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+  }
+  .carousel-wrapper :deep(.el-carousel) {
+    width: 360px;
+    height: 360px;
+  }
+  .carousel-wrapper :deep(.el-carousel__container) {
+    height: 360px;
+  }
+  .carousel-wrapper :deep(.el-carousel__item) {
+    border-radius: 8px;
+    overflow: hidden;
+    height: 360px;
+  }
+  .carousel-image-container {
+    width: 100%;
+    height: 360px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .carousel-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+  }
+  .carousel-info {
+    padding: 6px 10px;
+    text-align: center;
+  }
+  .carousel-info h2 {
+    font-size: 12px;
+    margin-bottom: 2px;
+  }
+  .carousel-info p {
+    font-size: 9px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .title {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  .cover {
+    aspect-ratio: 3 / 4;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+  }
+  .novel-title {
+    font-size: 13px;
+    margin: 5px 0 3px;
+    text-align: center;
+  }
+  .author {
+    display: none;
+  }
+  .card :deep(.el-card__body) {
+    padding: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-wrapper :deep(.el-carousel) {
+    width: 280px;
+    height: 280px;
+  }
+  .carousel-wrapper :deep(.el-carousel__container) {
+    height: 280px;
+  }
+  .carousel-wrapper :deep(.el-carousel__item) {
+    height: 280px;
+  }
+  .carousel-image-container {
+    height: 280px;
+  }
+  .carousel-info {
+    padding: 4px 8px;
+  }
+  .carousel-info h2 {
+    font-size: 10px;
+  }
+  .carousel-info p {
+    font-size: 8px;
+  }
+  .title {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  .cover {
+    aspect-ratio: 3 / 4;
+    height: auto;
+  }
+  .novel-title {
+    font-size: 12px;
+    margin: 4px 0 2px;
+  }
+  .card :deep(.el-card__body) {
+    padding: 4px;
+  }
+}
 </style>
